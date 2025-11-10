@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { createClient } from '@sanity/client'
 const sanity =createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: "production",
+  dataset:process.env.NEXT_PUBLIC_SANITY_DATASET,
   useCdn: true,
 });
 
