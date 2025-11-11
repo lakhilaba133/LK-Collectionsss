@@ -3,22 +3,13 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ClerkLoaded, SignInButton, useUser, UserButton } from "@clerk/nextjs";
+import { useUser, UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user } = useUser();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
-
-  const createClerkPasskey = async () => {
-    try {
-      const response = await user?.createPasskey();
-      console.log(response);
-    } catch (err) {
-      console.error("Error:", JSON.stringify(err, null, 2));
-    }
-  };
 
   return (
     <nav className="fixed top-0 left-0 w-full h-[80px] bg-white flex items-center justify-between px-4 md:px-8 lg:px-16 shadow-md z-50">
@@ -33,7 +24,7 @@ const Navbar = () => {
             className="w-auto h-auto ml-2 sm:ml-4 cursor-pointer"
           />
         </Link>
-        <h1 className="text-black font-bold text-lg sm:text-xl">La Khalaba </h1>
+        <h1 className="text-black font-bold text-lg sm:text-xl">La Khalaba</h1>
       </div>
 
       {/* Desktop Menu */}
@@ -49,42 +40,38 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Actions (Profile + Favorites) */}
+      {/* Actions (User + Wishlist) */}
       <div className="hidden sm:flex items-center space-x-4">
-        <div>
-          {user ? (
-            <div className="flex items-center space-x-2">
-              <UserButton />
-            </div>
-          ) : (
-            <SignInButton mode="modal" />
-          )}
-        </div>
+        {/* Wishlist Icon - Always visible */}
+        <Link href="/wishlist">
+          <Image
+            src="/images/heart-icon.svg"
+            alt="Wishlist"
+            width={24}
+            height={24}
+            className="w-6 h-6 cursor-pointer hover:opacity-80"
+          />
+        </Link>
 
-        <ClerkLoaded>
-          {user && (
-            <Link href="/wishlist">
-              <Image
-                src="/images/heart-icon.svg"
-                alt="Favorites"
-                width={24}
-                height={24}
-                className="w-6 h-6 cursor-pointer hover:opacity-80"
-              />
-            </Link>
-          )}
-        </ClerkLoaded>
+        {/* Show user profile if logged in */}
+        {user && <UserButton />}
       </div>
 
       {/* Mobile Menu */}
       <div className="md:hidden flex items-center gap-3">
-        {user ? (
-          <div className="flex items-center space-x-2">
-            <UserButton />
-          </div>
-        ) : (
-          <SignInButton mode="modal" />
-        )}
+        {/* Wishlist Icon - Always visible */}
+        <Link href="/wishlist">
+          <Image
+            src="/images/heart-icon.svg"
+            alt="Wishlist"
+            width={24}
+            height={24}
+            className="w-6 h-6 cursor-pointer hover:opacity-80"
+          />
+        </Link>
+
+        {/* Show User Button if logged in */}
+        {user && <UserButton />}
 
         {/* Menu Toggle */}
         <button

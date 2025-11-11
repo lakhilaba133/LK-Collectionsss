@@ -16,20 +16,45 @@
       "static/chunks/main-app.js",
       "static/chunks/app/collections/page.js"
     ],
-    "/exploredress/page": [
+    "/collections/daily-wear/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/exploredress/page.js"
+      "static/chunks/app/collections/daily-wear/page.js"
+    ],
+    "/customize/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/customize/[id]/page.js"
+    ],
+    "/contact/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/contact/page.js"
     ],
     "/wishlist/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/wishlist/page.js"
     ],
-    "/contact/page": [
+    "/collections/stitch-collection/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/contact/page.js"
+      "static/chunks/app/collections/stitch-collection/page.js"
+    ],
+    "/collections/party-wear/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/collections/party-wear/page.js"
+    ],
+    "/collections/bridal-wear/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/collections/bridal-wear/page.js"
+    ],
+    "/privacy-policy/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/privacy-policy/page.js"
     ]
   }
 }
