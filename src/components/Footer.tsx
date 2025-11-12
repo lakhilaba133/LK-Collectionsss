@@ -9,7 +9,7 @@ const Footer = () => {
         {/* Brand */}
         <div>
           <h2 className="text-2xl font-semibold text-gray-900 mb-3">
-            La Kahalaba Collection
+            La Kahilaba Collection
           </h2>
           <p className="text-gray-600 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
             Timeless fashion, crafted with elegance and inspired by modern minimalism.
@@ -58,7 +58,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-gray-200 mt-10 pt-6 text-center text-gray-500 text-sm">
-        © {new Date().getFullYear()} La Kahalaba Collection. All rights reserved.
+        © {new Date().getFullYear()} La Kahilaba Collection. All rights reserved.
       </div>
     </footer>
   );
