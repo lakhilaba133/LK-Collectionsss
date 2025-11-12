@@ -130,7 +130,29 @@ const products: Product[] = [
   src: "/images/image16.png",
   category: "Party Wear",
 },
+{
+  id: 18,
+  excerpt: "Elegent Maxi.",
+  details: "Perfect for Parties.",
+  src: "/images/image18.png",
+  category: "Party Wear", 
+},
 
+{
+  id: 19,
+  excerpt: "Stylish Maxi With beautiful sleeves.",
+  details: "Lightweight chiffon fabric, perfect for festive and evening occasions.",
+  src: "/images/image19.png",
+  category: "Party Wear",
+},
+
+{
+  id: 20,
+  excerpt: "Chic party suit with embroidered accents.",
+  details: "Made from premium chiffon fabric, ideal for celebrations and special events.",  
+  src: "/images/image20.png",
+  category: "Party Wear",
+}
 ];
 
 export default function PartyWearPage() {
