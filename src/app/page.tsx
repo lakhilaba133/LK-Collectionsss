@@ -53,7 +53,7 @@ const Page = () => {
           Discover our exclusive boutique range of stylish clothes.
         </p>
         <div className="flex flex-wrap justify-center mt-10 gap-6 sm:gap-10">
-          {["image16.png", "image2.png", "image5.png"].map((img, index) => (
+          {["image16.png", "image2.png", "Image5.png"].map((img, index) => (
             <div
               key={index}
               className="w-[90%] sm:w-[300px] md:w-[380px] rounded-lg overflow-hidden shadow-md"
