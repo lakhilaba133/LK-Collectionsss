@@ -41,11 +41,13 @@ export default function CustomizePage() {
           className="border-2 border-[#E21E80] rounded-xl px-5 py-3 w-72 sm:w-80 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#E21E80] transition-all"
         >
           <option value="">Choose color</option>
+          <option value="">Original Color</option>  
           <option value="black">Black</option>
           <option value="beige">Beige</option>
           <option value="blue">Blue</option>
           <option value="red">Red</option>
           <option value="white">White</option>
+
         </select>
       </div>
 
