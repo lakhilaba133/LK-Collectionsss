@@ -24,9 +24,9 @@ const FAQPage: React.FC = () => {
 
         <p className="text-gray-700 text-center mb-10 max-w-2xl mx-auto">
           Here are answers to some common questions about our{" "}
-          <span className="font-semibold text-[#B57D6A]">Women’s</span> and{" "}
-          <span className="font-semibold text-[#B57D6A]">clothing</span>{" "}
-          customization.
+          <span className="font-semibold text-[#B57D6A]">Women’s clothing</span> and{" "}
+          <span className="font-semibold text-[#B57D6A]">customization.</span>{" "}
+    
         </p>
 
         <div className="space-y-6">
