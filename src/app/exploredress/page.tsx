@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <div className="mt-11 flex flex-col items-center justify-center min-h-screen bg-pink-50 px-4">
       <h1 className="text-4xl font-bold text-pink-700 mb-6 text-center">
-        Explore La Khalaba Women’s Collection
+        Explore La Khilaba Women’s Collection
       </h1>
 
       <div className="relative w-full max-w-2xl mb-6" {...handlers}>
