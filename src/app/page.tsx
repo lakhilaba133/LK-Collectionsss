@@ -124,7 +124,7 @@ const Page = () => {
           Share your favorite looks with
         </h1>
         <h1 className="text-pink-700 text-2xl sm:text-4xl font-bold mt-2">
-          #LaKhilabaCollection
+          #La-Khilaba-Collection
         </h1>
 
         <div className="flex flex-wrap justify-center gap-3 mt-8">
