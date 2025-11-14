@@ -8,29 +8,9 @@ const faqs = [
       "Yes! You can select design, size, color, and fabric for most items. Use the 'Customize' option on the product page.",
   },
   {
-    question: "How long does a custom order take?",
-    answer:
-      "Custom orders usually take 7–14 business days depending on the complexity of the design and availability of materials.",
-  },
-  {
-    question: "Can I change sizes or colors after ordering?",
-    answer:
-      "Once the custom order is placed, changes cannot be made. Please double-check your selections before confirming the order.",
-  },
-  {
-    question: "What if I receive the wrong customization?",
-    answer:
-      "If the product does not match your customization, contact our support team within 5 days. We will arrange a replacement or refund.",
-  },
-  {
-    question: "Which payment methods are available?",
-    answer:
-      "We accept debit/credit cards, bank transfers, and Cash on Delivery depending on your location.",
-  },
-  {
     question: "How can I contact support?",
     answer:
-      "You can email us at support@lakahalaba.com or WhatsApp us at +92 324 2129476 for assistance.",
+      "You can email us at lakhilaba133@gmail.com or WhatsApp us at +92 3061102155 for assistance.",
   },
 ];
 
@@ -45,8 +25,8 @@ const FAQPage: React.FC = () => {
         <p className="text-gray-700 text-center mb-10 max-w-2xl mx-auto">
           Here are answers to some common questions about our{" "}
           <span className="font-semibold text-[#B57D6A]">Women’s</span> and{" "}
-          <span className="font-semibold text-[#2C3E50]">Men’s</span> clothing
-          customization options, orders, and delivery.
+          <span className="font-semibold text-[#B57D6A]">clothing</span>{" "}
+          customization.
         </p>
 
         <div className="space-y-6">
