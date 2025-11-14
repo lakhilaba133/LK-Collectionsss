@@ -10,7 +10,7 @@ const PrivacyPolicyPage = () => {
           Privacy Policy
         </h1>
         <p className="text-gray-700 leading-relaxed mb-8 text-center max-w-2xl mx-auto">
-          At La Khalaba Collection, we respect your privacy and are committed
+          At La Khilaba Collection, we respect your privacy and are committed
           to protecting your personal information. This policy explains how we
           collect, use, and safeguard your data.
         </p>
@@ -70,7 +70,7 @@ const PrivacyPolicyPage = () => {
                 href="mailto:privacy@lakahalaba.com"
                 className="text-[#B88E2F] font-medium"
               >
-                privacy@lakahalaba.com
+               lakhilaba133@gmail.com
               </a>
               .
             </p>
