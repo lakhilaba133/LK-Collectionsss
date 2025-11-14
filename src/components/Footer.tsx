@@ -58,7 +58,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-gray-200 mt-10 pt-6 text-center text-gray-500 text-sm">
-        © {new Date().getFullYear()} La Kahilaba Collection. All rights reserved.
+        © {new Date().getFullYear()} La Khilaba Collection. All rights reserved.
       </div>
     </footer>
   );
