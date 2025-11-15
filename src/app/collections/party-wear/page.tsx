@@ -1,149 +1,312 @@
-import Link from "next/link";
-import Image from "next/image";
-import Homeproducts from "./query/Homeproducts/page";
-import dynamic from "next/dynamic";
+// src/app/collections/party-wear/page.tsx
+"use client";
 
-const Page = () => {
-  const LazyComponent = dynamic(() => import("./query/Homeproducts/page"), {
-    ssr: false,
-  });
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import { Heart } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useFavorites } from "@/context/FavoritesContext";
+
+// Product type
+interface Product {
+  id: number;
+  excerpt: string;
+  details: string;
+  src: string;
+  category: string;
+}
+
+// Sample products for Party Wear
+const products: Product[] = [
+ {
+    id: 4,
+    excerpt: "Black frill maxi dress for casual parties.",
+    details: "Soft fabric with flowing frills, comfortable yet stylish.",
+    src: "/images/image4.png",
+    category: "Party Wear",
+  },
+
+{
+  id: 22,
+  excerpt: "Gorgeous party suit with lace detailing.",
+  details: "High-quality Silk , ideal for special occasions and celebrations.",
+  src: "/images/image22.png",
+  category: "Party Wear",
+},
+{  
+  id : 23,
+  excerpt: "Blue party sui t ",
+  details: "Made from premium silk, perfect for festive events and evening parties.",
+  src: "/images/image23.png",
+  category: "Party Wear",
+},
+ 
+  {
+    id: 1,
+    excerpt: "Elegant pink party dress with lace details.",
+    details: "Made from high-quality chiffon fabric, perfect for evening parties and celebrations.",
+    src: "/images/image1.png",
+    category: "Party Wear",
+  }, 
+  {
+    id: 2,
+    excerpt: "Stylish  sequined dress for special occasions.",
+    details: "Premium fabric with sequins, perfect for weddings and formal gatherings.",
+    src: "/images/image2.png",
+    category: "Party Wear",
+  },
+  {
+    id: 3,
+    excerpt: "Golden shimmer gown with fitted silhouette.",
+    details: "High-quality satin material, elegant and classy for party nights.",
+    src: "/images/image3.png",
+    category: "Party Wear",
+  },
+    {
+  id: 21,
+  excerpt: "Blue party suit .",
+  details: "Soft chiffon fabric, perfect for evening parties and festive occasions.",
+  src: "/images/image21.png",
+  category: "Party Wear",
+},
+ 
+  {
+    id: 5,
+    excerpt: "Velvet dress with full sleeves.",
+    details: "Luxurious velvet fabric, perfect for winter parties.",
+    src: "/images/Image5.png",
+    category: "Party Wear",
+  },
+  {
+  id: 6,
+  excerpt: "Elegant pink party suit with floral embroidery.",
+  details: "Made from soft chiffon fabric, ideal for festive and evening events.",
+  src: "/images/image6.png",
+  category: "Party Wear",
+},
+{
+  id: 7,
+  excerpt: "Charming Red party suit with sequin detailing.",
+  details: "Premium chiffon fabric ensures comfort and elegance for celebrations.",
+  src: "/images/image7.png",
+  category: "Party Wear",
+},
+{
+  id: 8,
+  excerpt: "Stylish pink suit with lace and bead work.",
+  details: "Perfect choice for parties, crafted from high-quality chiffon.",
+  src: "/images/image8.png",
+  category: "Party Wear",
+},
+{
+  id: 9,
+  excerpt: "Elegant Golden chiffon suit with intricate thread embroidery.",
+  details: "Designed for evening parties and festive gatherings.",
+  src: "/images/image9.png",
+  category: "Party Wear",
+},
+{
+  id: 10,
+  excerpt: "Pink party suit with delicate floral lace accents.",
+  details: "Soft, premium chiffon fabric makes it perfect for special occasions.",
+  src: "/images/image10.png",
+  category: "Party Wear",
+},
+{
+  id: 11,
+  excerpt: "Trendy Green suit with Full Sleeves.",
+  details: "Lightweight chiffon fabric for comfort and graceful appearance.",
+  src: "/images/image11.png",
+  category: "Party Wear",
+},
+{
+  id: 12,
+  excerpt: "Pink evening party suit with embroidered motifs.",
+  details: "Perfect for festive events and celebrations with a modern touch.",
+  src: "/images/image12.png",
+  category: "Party Wear",
+},
+{
+  id: 13,
+  excerpt: "Modern  party suit with sequin embellishments.",
+  details: "Designed for parties and special events, combining elegance and style.",
+  src: "/images/Image13.png",
+  category: "Party Wear",
+},
+{
+  id: 14,
+  excerpt: "Pink party suit with elegant lace neckline.",
+  details: "Soft chiffon fabric with delicate lace work, ideal for evening parties.",
+  src: "/images/image14.png",
+  category: "Party Wear",
+},
+{
+  id: 15,
+  excerpt: "Stylish  party suit with subtle shimmer.",
+  details: "Lightweight and comfortable, perfect for festive occasions.",
+  src: "/images/image15.png",
+  category: "Party Wear",
+},
+{
+  id: 16,
+  excerpt: "Black Maxi party suit with embroidered floral patterns.",
+  details: "High-quality chiffon fabric designed for celebrations and special events.",
+  src: "/images/image16.png",
+  category: "Party Wear",
+},
+{
+  id: 18,
+  excerpt: "Elegent Maxi.",
+  details: "Perfect for Parties.",
+  src: "/images/image18.png",
+  category: "Party Wear", 
+},
+
+{
+  id: 19,
+  excerpt: "Stylish Maxi With beautiful sleeves.",
+  details: "Lightweight chiffon fabric, perfect for festive and evening occasions.",
+  src: "/images/image19.png",
+  category: "Party Wear",
+},
+
+{
+  id: 20,
+  excerpt: "Chic party suit with embroidered accents.",
+  details: "Made from premium chiffon fabric, ideal for celebrations and special events.",  
+  src: "/images/image20.png",
+  category: "Party Wear",
+},
+
+];
+
+export default function PartyWearPage() {
+  const router = useRouter();
+  const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
+
+  const [expandedItems, setExpandedItems] = useState<number[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 3;
+
+  // Filter Party Wear products
+  const filteredProducts = products.filter((p) => p.category === "Party Wear");
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const displayedItems = filteredProducts.slice(startIndex, startIndex + itemsPerPage);
+
+  const toggleFavorite = (product: Product) => {
+    const isFav = favorites.some((item) => item.id === product.id);
+    if (isFav) {
+      removeFromFavorites(product.id);
+    } else {
+      addToFavorites({
+        id: product.id,
+        image: product.src,
+        category: product.excerpt,
+      });
+    }
+  };
+
+  const toggleDetails = (id: number) => {
+    setExpandedItems((prev) =>
+      prev.includes(id) ? prev.filter((itemId) => itemId !== id) : [...prev, id]
+    );
+  };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
 
   return (
-    <>
-      {/* HERO SECTION */}
-      <div className="relative bg-gray-50 flex flex-col md:block">
-        {/* Hero Image */}
-        <div className="relative w-full aspect-[16/9] md:h-auto">
-          <Image
-            src="/images/hero-background.png"
-            alt="hero-background"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-
-        {/* Text Content */}
-        <div className="relative md:absolute md:top-1/2 md:right-10 transform md:-translate-y-1/2 bg-pink-100 p-4 sm:p-6 md:p-10 rounded-lg shadow-lg max-w-[90%] sm:max-w-md md:max-w-lg mx-auto mt-[-60px] md:mt-0">
-          <h2 className="font-poppins font-semibold text-[12px] sm:text-[14px] md:text-[16px] uppercase text-pink-700 tracking-wide">
-            New Arrival
-          </h2>
-          <h1 className="text-[16px] sm:text-xl md:text-3xl font-bold text-pink-600 mt-2 sm:mt-3 md:mt-4 mb-2 sm:mb-4 leading-snug">
-            Discover Our New Clothes Collection
-          </h1>
-          <p className="text-pink-800 mb-4 text-[10px] sm:text-sm md:text-base leading-relaxed">
-            La Khilaba Women's Collection brings timeless elegance and modern
-            charm to every wardrobe. Stylish, comfortable, and made for
-            confident women who love to stand out.
-          </p>
-          <Link href={"/collections"}>
-            <button className="bg-pink-500 text-white text-[12px] sm:text-sm md:text-lg px-5 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 hover:bg-pink-600 transition shadow-md w-full sm:w-auto">
-              Order Now
-            </button>
-          </Link>
-        </div>
+    <section className="min-h-screen bg-pink-50 py-10 px-6 md:px-16">
+      <div className="flex justify-between items-center mb-10">
+        <h1 className="text-4xl font-extrabold text-pink-700">Party Wear</h1>
       </div>
 
-      {/* BROWSE THE RANGE */}
-      <section className="py-10 bg-pink-50 text-center">
-        <h1 className="text-pink-700 text-xl sm:text-3xl font-bold">
-          Explore La Khilaba Collections
-        </h1>
-        <p className="text-pink-500 mt-2 sm:mt-4 text-sm sm:text-base">
-          Discover our exclusive boutique range of stylish clothes.
-        </p>
-        <div className="flex flex-wrap justify-center mt-10 gap-6 sm:gap-10">
-          {["image16.png", "Image13.png", "Image18.png"].map((img, index) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {displayedItems.map((item) => {
+          const isFav = favorites.some((f) => f.id === item.id);
+          return (
             <div
-              key={index}
-              className="w-[90%] sm:w-[300px] md:w-[380px] rounded-lg overflow-hidden shadow-md"
+              key={item.id}
+              className="relative flex flex-col lg:flex-row items-center bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500"
             >
-              <Image
-                src={`/images/${img}`}
-                alt="La Khilaba collection"
-                width={380}
-                height={480}
-                className="object-cover w-full h-auto hover:scale-105 transition-transform duration-300"
-              />
+              <div className="relative w-full lg:w-1/2">
+                <Image
+                  src={item.src}
+                  alt={item.excerpt}
+                  width={700}
+                  height={500}
+                  className="w-full h-full object-cover"
+                />
+                <button
+                  onClick={() => toggleFavorite(item)}
+                  className="absolute bottom-4 right-4 bg-white rounded-full p-2 shadow-md hover:bg-pink-100 transition"
+                >
+                  <Heart
+                    className={`w-6 h-6 ${
+                      isFav ? "fill-pink-600 text-pink-600" : "text-gray-400"
+                    }`}
+                  />
+                </button>
+              </div>
+
+              <div className="w-full lg:w-1/2 p-8 text-gray-800 space-y-5">
+                <p className="text-lg italic text-gray-600">{item.excerpt}</p>
+                {expandedItems.includes(item.id) && (
+                  <p className="text-base text-gray-700 leading-relaxed">{item.details}</p>
+                )}
+
+                <button
+                  onClick={() => toggleDetails(item.id)}
+                  className="text-lg text-pink-600 font-semibold underline hover:text-pink-800 transition block"
+                >
+                  {expandedItems.includes(item.id) ? "Show Less" : "Read More"}
+                </button>
+
+                <div className="flex justify-start mt-4">
+                  <button
+                    onClick={() => router.push(`/customize/${item.id}`)}
+                    className="px-5 py-2 bg-pink-600 text-white rounded-xl font-semibold hover:bg-pink-700 transition w-max"
+                  >
+                    Customize
+                  </button>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
-      </section>
+          );
+        })}
+      </div>
 
-      {/* OUR PRODUCTS */}
-      <section className="py-10 bg-pink-50 text-center">
-        <h1 className="text-pink-700 text-2xl sm:text-4xl font-bold mt-6 mb-6">
-          Our Collections
-        </h1>
-        <Homeproducts />
-        <div className="flex justify-center mt-6">
-          <Link href={"/collections"}>
-            <button className="px-6 py-3 bg-white border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white transition duration-300 rounded-md">
-              Show More
-            </button>
-          </Link>
-        </div>
-      </section>
-
-      {/* INSPIRATION */}
-      <section className="bg-pink-50 mt-10 flex flex-col lg:flex-row items-center justify-around px-6 gap-10">
-        <div className="text-center lg:text-left max-w-md">
-          <h1 className="text-pink-700 text-2xl sm:text-3xl md:text-4xl font-bold">
-            Explore La Khilaba Women’s Collection
-          </h1>
-          <p className="text-pink-500 mt-4 text-sm sm:text-base">
-            Discover our exclusive range of elegant and stylish dresses designed
-            for every occasion.
-          </p>
-          <Link href={`/exploredress`}>
-            <button className="bg-pink-500 text-white px-6 py-3 mt-6 rounded-md hover:bg-pink-600 transition w-full sm:w-auto">
-              Explore More
-            </button>
-          </Link>
-        </div>
-
-        {["dailywear5.png", "dailywear7.png"].map((image, i) => (
-          <div
-            key={i}
-            className="w-[80%] sm:w-[300px] md:w-[372px] rounded-lg overflow-hidden shadow-md"
-          >
-            <Image
-              src={`/images/${image}`}
-              alt={image}
-              width={372}
-              height={486}
-              className="object-cover w-full h-auto"
-            />
-          </div>
-        ))}
-      </section>
-
-      {/* SOCIAL SECTION */}
-      <section className="bg-pink-50 py-10 text-center px-4">
-        <h1 className="text-pink-700 text-lg sm:text-xl">
-          Share your favorite looks with
-        </h1>
-        <h1 className="text-pink-700 text-2xl sm:text-4xl font-bold mt-2">
-          #La-Khilaba-Collection
-        </h1>
-
-        <div className="flex flex-wrap justify-center gap-3 mt-8">
-          {["dailywear6", "image22", "dailywear2", "image17", "image14", "image23", "image21"].map(
-            (image, index) => (
-              <Image
-                key={index}
-                src={`/images/${image}.png`}
-                alt={image}
-                width={160}
-                height={160}
-                className="rounded-lg shadow-md object-cover w-[140px] sm:w-[160px]"
-              />
-            )
-          )}
-        </div>
-      </section>
-    </>
+      {/* Pagination */}
+      <div className="flex justify-center items-center gap-6 mt-12">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className={`px-6 py-3 text-xl font-bold rounded-xl transition-all duration-300 ${
+            currentPage === 1
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-pink-600 text-white hover:bg-pink-700"
+          }`}
+        >
+          Previous
+        </button>
+        <span className="text-2xl font-bold text-gray-700">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+          className={`px-6 py-3 text-xl font-bold rounded-xl transition-all duration-300 ${
+            currentPage === totalPages
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-pink-600 text-white hover:bg-pink-700"
+          }`}
+        >
+          Next
+        </button>
+      </div>
+    </section>
   );
-};
-
-export default Page;
+}
