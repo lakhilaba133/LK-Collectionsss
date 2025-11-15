@@ -152,7 +152,29 @@ const products: Product[] = [
   details: "Made from premium chiffon fabric, ideal for celebrations and special events.",  
   src: "/images/image20.png",
   category: "Party Wear",
+},
+{
+  id: 21,
+  excerpt: "Blue party suit .",
+  details: "Soft chiffon fabric, perfect for evening parties and festive occasions.",
+  src: "/images/image21.png",
+  category: "Party Wear",
+},
+{
+  id: 22,
+  excerpt: "Gorgeous party suit with lace detailing.",
+  details: "High-quality Silk , ideal for special occasions and celebrations.",
+  src: "/images/image22.png",
+  category: "Party Wear",
+},
+{  
+  id : 23,
+  excerpt: "Blue party sui t ",
+  details: "Made from premium silk, perfect for festive events and evening parties.",
+  src: "/images/image23.png",
+  category: "Party Wear",
 }
+
 ];
 
 export default function PartyWearPage() {
